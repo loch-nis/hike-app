@@ -13,8 +13,8 @@ class PersonalChecklistItem extends Model
 
     protected $guarded = ['id', 'checklist_id', 'created_at', 'updated_at'];
 
-    public function personalChecklist()
+    public function checklist()
     {
-        return $this->belongsTo(PersonalChecklist::class);
+        return $this->belongsTo(PersonalChecklist::class, 'checklist_id');
     }
 }

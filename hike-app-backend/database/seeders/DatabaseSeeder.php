@@ -13,13 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $this->call(HikeTestSeeder::class);
-
-        // todo this is probably not good, since a HikeUser isn't guaranteed to have a personalChecklist, right ?!
-        $this->call(UserSeeder::class);
-        $this->call(HikeSeeder::class);
-        $this->call(HikeUserSeeder::class);
-        $this->call(PersonalChecklistSeeder::class);
-        $this->call(PersonalChecklistItemSeeder::class);
+        // good stuff
+        $this->call(HikeExampleSeeder::class);
     }
 }

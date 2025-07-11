@@ -22,7 +22,7 @@ export function PersonalChecklistItem({ item }) {
         >
           {item.content}
         </span>
-        <span className="hidden group-hover:block">👈</span>
+        <span className="hidden lg:group-hover:block">👈</span>
       </div>
       <button
         className="cursor-pointer"

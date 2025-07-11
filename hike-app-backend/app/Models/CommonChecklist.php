@@ -19,6 +19,7 @@ class CommonChecklist extends Model
 
     public function commonChecklistItems()
     {
-        return $this->hasMany(CommonChecklistItem::class, 'checklist_id'); // because its not called common_checklist_id
+        return $this->hasMany(CommonChecklistItem::class,
+            'checklist_id'); // because it's not called common_checklist_id. Although in my next project, I should probably just follow convention to avoid this in the first place
     }
 }

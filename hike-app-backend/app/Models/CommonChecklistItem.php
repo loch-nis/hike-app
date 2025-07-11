@@ -11,9 +11,9 @@ class CommonChecklistItem extends Model
     use HasUuid;
     use HasFactory;
 
-    public function commonChecklist()
+    public function checklist()
     {
-        return $this->belongsTo(CommonChecklist::class);
+        return $this->belongsTo(CommonChecklist::class, 'checklist_id');
     }
 
     public function checkedBy()

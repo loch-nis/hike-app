@@ -28,14 +28,6 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -51,6 +43,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(HikeUser::class);
     }
 
+    // todo test if this actually works
     public function hikes()
     {
         return $this->hasManyThrough(
@@ -61,5 +54,14 @@ class User extends Authenticatable implements JWTSubject
             'id',
             'hike_id',
         );
+    }
+
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 }

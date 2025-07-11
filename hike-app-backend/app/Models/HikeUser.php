@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class HikeUser extends Model
@@ -26,8 +28,15 @@ class HikeUser extends Model
         return $this->hasOne(PersonalChecklist::class);
     }
 
-    public function checkedItems()
+    // todo I dont think this works? perhaps test
+    public function checkedItems(): HasMany
     {
         return $this->hasMany(CommonChecklistItem::class);
+    }
+
+    // todo not sure if correct?? YES BBY it isssss
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
