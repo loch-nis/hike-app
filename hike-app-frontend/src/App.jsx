@@ -1,27 +1,27 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HikeDetails from "./pages/HikeDetails";
-import Hikes from "./pages/Hikes";
-import PageNotFound from "./pages/PageNotFound";
-import Login from "./pages/Login";
-import AuthLayout from "./ui/AuthLayout";
+import { HikeDetails } from "./pages/HikeDetails";
+import { Hikes } from "./pages/Hikes";
+import { PageNotFound } from "./pages/PageNotFound";
+import { Login } from "./pages/Login";
+import { AuthLayout } from "./ui/AuthLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import Signup from "./pages/Signup";
-import AuthProvider from "./context/AuthContext";
-import ProtectedRoute from "./ui/ProtectedRoute";
-import AppLayout from "./ui/AppLayout";
-import CreateHike from "./pages/CreateHike";
+import { Signup } from "./pages/Signup";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./ui/ProtectedRoute";
+import { AppLayout } from "./ui/AppLayout";
+import { CreateHike } from "./pages/CreateHike";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 60 * 1000,
-      staleTime: 0,
+      staleTime: 60 * 1000,
+      // staleTime: 0,
     },
   },
 });
 
-export default function App() {
+export function App() {
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
@@ -39,7 +39,7 @@ export default function App() {
               }
             >
               <Route path="hikes" element={<Hikes />} />
-              <Route path="hikes/new" element={<CreateHike />} />
+              <Route path="hikes/create" element={<CreateHike />} />
               <Route path="hikes/:hikeId" element={<HikeDetails />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />

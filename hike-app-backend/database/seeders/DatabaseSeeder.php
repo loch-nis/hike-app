@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(HikeTestSeeder::class);
+//        $this->call(HikeTestSeeder::class);
+
+        // todo this is probably not good, since a HikeUser isn't guaranteed to have a personalChecklist, right ?!
+        $this->call(UserSeeder::class);
+        $this->call(HikeSeeder::class);
+        $this->call(HikeUserSeeder::class);
+        $this->call(PersonalChecklistSeeder::class);
+        $this->call(PersonalChecklistItemSeeder::class);
     }
 }

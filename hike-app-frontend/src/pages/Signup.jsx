@@ -1,9 +1,9 @@
 import { Logo } from "../ui/Logo";
 import { Link } from "react-router-dom";
-import SignupForm from "../features/authentication/SignupForm";
-import Heading from "../ui/Heading";
+import { SignupForm } from "../features/authentication/SignupForm";
+import { Heading } from "../ui/Heading";
 
-function Signup() {
+export function Signup() {
   // todo have authLayout or authPageLayout include more of these wrapper divs
 
   return (
@@ -28,5 +28,3 @@ function Signup() {
     </>
   );
 }
-
-export default Signup;

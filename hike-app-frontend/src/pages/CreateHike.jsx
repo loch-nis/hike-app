@@ -1,9 +1,9 @@
-import Heading from "../ui/Heading";
+import { Heading } from "../ui/Heading";
 import { Logo } from "../ui/Logo";
-import BackButton from "../ui/BackButton";
-import { HikeForm } from "../features/hikes/HikeForm";
+import { BackButton } from "../ui/BackButton";
+import { HikeForm } from "../features/hikes/components/HikeForm";
 
-export default function CreateHike() {
+export function CreateHike() {
   return (
     <>
       <BackButton />

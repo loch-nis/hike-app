@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PersonalChecklist extends Model
 {
     use HasUuid;
+    use HasFactory;
 
     protected $fillable = ['hike_user_id'];
 
@@ -18,6 +20,6 @@ class PersonalChecklist extends Model
 
     public function personalChecklistItems()
     {
-        return $this->hasMany(PersonalChecklistItem::class);
+        return $this->hasMany(PersonalChecklistItem::class, 'checklist_id');
     }
 }

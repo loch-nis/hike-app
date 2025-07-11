@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Logo } from "../ui/Logo";
-import LoginForm from "../features/authentication/LoginForm";
-import Heading from "../ui/Heading";
+import { LoginForm } from "../features/authentication/LoginForm";
+import { Heading } from "../ui/Heading";
 
-function Login() {
+export function Login() {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center lg:px-6 lg:py-12">
       <Logo />
@@ -24,5 +24,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

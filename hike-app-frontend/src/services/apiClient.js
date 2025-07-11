@@ -3,7 +3,7 @@ import { API_BASE_URL } from "../config";
 import { getToken, hasToken, removeTokenAndTokenExpiry } from "./tokenService";
 import toast from "react-hot-toast";
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: API_BASE_URL,
 });
 
@@ -29,5 +29,3 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export default apiClient;

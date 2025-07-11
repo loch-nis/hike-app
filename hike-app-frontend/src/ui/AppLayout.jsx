@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import { Header } from "./Header";
 
-export default function AppLayout() {
+export function AppLayout() {
   return (
     <>
       <div className="relative min-h-screen">
@@ -16,3 +16,4 @@ export default function AppLayout() {
     </>
   );
 }
+// todo parchment as bg? Or just the color?

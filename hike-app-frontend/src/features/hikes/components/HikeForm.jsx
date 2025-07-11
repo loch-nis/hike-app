@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button } from "../../ui/Button";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
-import { useCreateHike } from "./useCreateHike";
-import { SpinnerMini } from "../../ui/SpinnerMini";
+import { Button } from "../../../ui/Button";
+import { FormRow } from "../../../ui/FormRow";
+import { Input } from "../../../ui/Input";
+import { useCreateHike } from "../hooks/useCreateHike";
+import { SpinnerMini } from "../../../ui/SpinnerMini";
 
 export function HikeForm() {
   const [title, setTitle] = useState("");

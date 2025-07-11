@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Button } from "../../ui/Button";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
+import { FormRow } from "../../ui/FormRow";
+import { Input } from "../../ui/Input";
 import { SpinnerMini } from "../../ui/SpinnerMini";
 import { useSignup } from "./useSignup";
 
-export default function SignupForm() {
+export function SignupForm() {
   const { signup, isPending } = useSignup();
   const { register, formState, handleSubmit, getValues, reset } = useForm();
   const { errors } = formState;

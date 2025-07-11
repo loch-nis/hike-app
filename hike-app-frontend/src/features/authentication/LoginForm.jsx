@@ -1,12 +1,12 @@
 import { useState } from "react";
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
+import { FormRow } from "../../ui/FormRow";
+import { Input } from "../../ui/Input";
 import { useLogin } from "./useLogin";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/Button";
 import { SpinnerMini } from "../../ui/SpinnerMini";
 
-export default function LoginForm() {
+export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isPending } = useLogin();

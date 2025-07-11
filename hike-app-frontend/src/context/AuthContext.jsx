@@ -11,7 +11,7 @@ import {
 
 export const AuthContext = createContext();
 
-export default function AuthProvider({ children }) {
+export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState(() => tokenService.getToken());
   // do I really need this tho??

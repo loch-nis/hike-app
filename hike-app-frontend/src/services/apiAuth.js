@@ -1,5 +1,5 @@
-import apiClient from "./apiClient";
-import authClient from "./authClient";
+import { apiClient } from "./apiClient";
+import { authClient } from "./authClient";
 
 export async function loginApi({ email, password }) {
   // axios will throw error automatically

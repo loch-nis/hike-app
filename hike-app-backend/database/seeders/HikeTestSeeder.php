@@ -18,6 +18,7 @@ class HikeTestSeeder extends Seeder
      */
     public function run(): void
     {
+        // todo delete if unused. Way too hard coded
         $users = User::factory()->count(3)->create();
 
         $hike = Hike::create([

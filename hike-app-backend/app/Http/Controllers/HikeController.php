@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hike;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class HikeController extends Controller
 {
     public function index()
     {
-        $hikes = auth()->user()->hikes()->get();
+        $hikes = auth()->user()->hikes()->latest()->get();
 
         return response()->json($hikes, 200);
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $hike = Hike::create([
-            'title' => $request['title'],
+            'title' => request('title'),
         ]);
 
+        // todo test if any of this is done auto
         $hikeUser = $hike->hikeUsers()->create([
             'hike_id' => $hike->id,
             'user_id' => auth()->id(),
@@ -27,26 +28,34 @@ class HikeController extends Controller
             'joined_at' => now(),
         ]);
 
+        // todo do I need to set the hike_id here? or done auto??
+        // its auto!
         $hike->commonChecklist()->create();
 
-        $hikeUser->personalChecklists()->create([
-            'hike_user_id' => $hikeUser->id,
-        ]);
+        // so also don't need to set hike id here!
+        $hikeUser->personalChecklist()->create();
 
-        return response()->json($hike->load('commonChecklist'), 201);
+        return response()->json($hike, 201);
     }
 
-    public function join(Request $request)
+    public function show(Hike $hike): JsonResponse
+    {
+        // todo this should be implicit, so best practice to leave it out??
+        return response()->json($hike, 200);
+    }
+
+    public function join(Hike $hike)
     {
         // naming?!?!?
     }
 
-    public function show(string $id)
+    public function update(string $id)
     {
-        return Hike::findOrFail($id);
+        // todo route model binding here and below
     }
 
-    public function update(string $id) {}
-
-    public function destroy(string $id) {}
+    public function destroy(string $id)
+    {
+        // todo
+    }
 }

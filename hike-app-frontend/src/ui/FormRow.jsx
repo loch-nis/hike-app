@@ -1,4 +1,4 @@
-export default function FormRow({ label, htmlFor, children, action }) {
+export function FormRow({ label, htmlFor, children, action }) {
   return (
     <div>
       <div className="flex items-center justify-between">

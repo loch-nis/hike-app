@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Middleware\ApiAuthenticate;
+use App\Http\Middleware\RedirectIfAuthenticatedApi;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\RedirectIfAuthenticatedApi;
 
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -17,7 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/api/hikes',
             '/api/hikes/*',
+            '/api/personal-checklist-items/*',
+            '/api/common-checklist-items/*',
             '/api/auth/*',
+            // todo set up CSRF !!!
         ]);
         $middleware->alias([
             'guest.api' => RedirectIfAuthenticatedApi::class,
