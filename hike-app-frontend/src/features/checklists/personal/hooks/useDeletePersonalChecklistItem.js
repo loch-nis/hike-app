@@ -7,7 +7,8 @@ export function useDeletePersonalChecklistItem() {
 
   const { mutate: deleteItem, isPending } = useMutation({
     mutationFn: ({ itemId }) => deletePersonalChecklistItemApi({ itemId }),
-    onSuccess: () => queryClient.invalidateQueries(["personalChecklist"]),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["personalChecklist"] }),
     onError: (error) => {
       toast.error("Error checking item: ", error);
     },

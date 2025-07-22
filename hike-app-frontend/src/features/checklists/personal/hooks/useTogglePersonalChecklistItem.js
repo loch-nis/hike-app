@@ -3,21 +3,20 @@ import { togglePersonalChecklistItemApi } from "../../../../services/apiChecklis
 import toast from "react-hot-toast";
 import { useState } from "react";
 
-export function useTogglePersonalChecklistItem(item) {
+export function useTogglePersonalChecklistItem({ item }) {
   const queryClient = useQueryClient();
   const [isChecked, setIsChecked] = useState(item.isChecked);
 
   const { mutate: toggleItem, isPending } = useMutation({
     mutationFn: ({ itemId }) => togglePersonalChecklistItemApi({ itemId }),
-    onMutate: () => setIsChecked((prev) => !prev), // why?
-    onSuccess: () => {
-      queryClient.invalidateQueries(["personalChecklist"]);
-    },
+    onMutate: () => setIsChecked((prev) => !prev), // optimistic ui
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["personalChecklist"] }),
     onError: (error) => {
       setIsChecked((prev) => !prev);
-      toast.error("Error checking item");
+      toast.error("Error checking item: ", error);
     },
-  }); // Whats the diff between mutateFn and onMutate ? :D
+  });
 
   return { isChecked, toggleItem, isPending };
 }

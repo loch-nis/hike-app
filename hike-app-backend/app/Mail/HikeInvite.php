@@ -36,7 +36,7 @@ class HikeInvite extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'view.name', // todo can I make this with jsx? Do I need to use Blade?
         );
     }
 

@@ -8,12 +8,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // good stuff
-        $this->call(HikeExampleSeeder::class);
+        $this->call([HikeSeeder::class]);
     }
 }

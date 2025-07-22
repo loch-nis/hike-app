@@ -4,6 +4,7 @@ export function BackButton({ children }) {
   const navigate = useNavigate();
   return (
     <button
+      type="button"
       className="bg-brand-orange absolute flex aspect-square cursor-pointer items-center justify-center rounded-full px-2 font-sans text-4xl font-bold text-gray-50 shadow-xl"
       onClick={() => navigate(-1)}
     >

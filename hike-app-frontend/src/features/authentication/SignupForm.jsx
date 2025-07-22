@@ -110,7 +110,7 @@ export function SignupForm() {
           })}
         />
       </FormRow>
-      <Button disabled={isPending}>
+      <Button type="submit" disabled={isPending}>
         {isPending ? <SpinnerMini /> : "Sign up"}
       </Button>
     </form>

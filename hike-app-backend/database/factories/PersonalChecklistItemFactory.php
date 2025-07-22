@@ -19,7 +19,7 @@ class PersonalChecklistItemFactory extends Factory
     {
         return [
             'checklist_id' => PersonalChecklist::factory(),
-            'is_checked' => fake()->boolean(),
+            'is_checked' => fake()->boolean(30),
             'checked_at' => fake()->randomElement([null, now()]),
             'content' => fake()->randomElement([
                 "🎒 Backpack", "💧 Water bottle", "🗺️ Map", "🧭 Compass", "📡 GPS device", "🥨 Snacks", "🥜 Trail mix",

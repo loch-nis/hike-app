@@ -33,10 +33,15 @@ class HikeUser extends Model
     {
         return $this->hasMany(CommonChecklistItem::class);
     }
-
-    // todo not sure if correct?? YES BBY it isssss
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    public function hike(): BelongsTo
+    {
+        return $this->belongsTo(Hike::class);
     }
 }

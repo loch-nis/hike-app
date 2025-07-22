@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+// todo naming
 class HikeRecommendationSeeder extends Seeder
 {
     /**
@@ -18,37 +19,39 @@ class HikeRecommendationSeeder extends Seeder
         $arr = [
             "🛏️ Sovepose",
             "🧤 Inderpose (især vinter)",
-            "X Liggeunderlag",
-            "X Skumunderlag (især vinter)",
-            "🛏️ Evt. lille dunpyntepude til hoved",
-            "🚽 Toiletgrej",
+            "🧽 Liggeunderlag",
+            "🥚 Æggebakke (især vinter)",
+            "🪶 Evt. lille dunpyntepude til hoved",
+            "🪥 Toiletgrej",
             "💧 1,5L vand pr. person til én overnatning",
             "🍽️ Spisegrej",
             "🔦 Pandelampe",
             "🔋 Powerbank/oplader",
             "🌧️ Poncho (Normal) hvis regn",
-            "🧥 Varmt tøj og undertøj",
+            "🧥 Varmt tøj + undertøj",
             "🥾 Sko/støvler",
             "🎁 Overraskelse!",
 
             // common
             "⛺ Telt/tarp hvis usikker overnatning",
-            "🗑️ Skraldeposer",
             "🪓 Økse og evt. sav",
-            "🔪 Dolk og tændstik",
-            "🔥 Jetboil/trangia inkl. gas",
-            "🚽 Shitkit",
+            "🔪 Dolk",
+            "🪾 Tændstikker",
+            "🔥 Jetboil og/eller trangia inkl. gas",
+            "🚽 Shitkit (håndsprit + toiletpapir)",
             "🩹 Førstehjælp (plaster, bandage, vabelplastre)",
+            "🗑️ Skraldeposer",
             "🧽 Opvaskesvamp",
             "🧼 Viskestykke",
+            "💡 Lyskilde, fx lyskæder",
 
             // food
             "🥣 Havregryn",
             "🍬 Sukker, evt. kanel",
             "🧂 Salt og peber",
-            "☕ Instant kaffe",
+            "☕️ Instant kaffe",
 
-            // evt.
+            // extras
             "📖 Bog til højtlæsnint eller Tablet 📱",
             "🩳 Badetøj og håndklæde",
             "🍺 Øl",

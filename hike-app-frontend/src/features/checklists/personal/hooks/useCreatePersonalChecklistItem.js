@@ -5,17 +5,16 @@ import toast from "react-hot-toast";
 export function useCreatePersonalChecklistItem() {
   const queryClient = useQueryClient();
 
-  const { mutate: createPersonalChecklistItem, isPending } = useMutation({
+  const { mutate: createItem, isPending } = useMutation({
     mutationFn: ({ hikeId, content }) =>
       createPersonalChecklistItemApi({ hikeId, content }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["personalChecklist"]);
-    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["personalChecklist"] }),
     onError: (error) => {
       const message =
         error?.response?.data?.message || "Error adding item to checklist";
       toast.error(message);
     },
   });
-  return { createPersonalChecklistItem, isPending };
+  return { createItem, isPending };
 }

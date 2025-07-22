@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Hike;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class HikeController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $hikes = auth()->user()->hikes()->latest()->get();
 
-        return response()->json($hikes, 200);
+        return response()->json($hikes);
     }
 
-    public function store()
+    public function store(Request $request): JsonResponse
     {
         $hike = Hike::create([
-            'title' => request('title'),
+            'title' => $request['title'],
         ]);
 
         // todo test if any of this is done auto
@@ -40,8 +41,7 @@ class HikeController extends Controller
 
     public function show(Hike $hike): JsonResponse
     {
-        // todo this should be implicit, so best practice to leave it out??
-        return response()->json($hike, 200);
+        return response()->json($hike);
     }
 
     public function join(Hike $hike)

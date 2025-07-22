@@ -15,4 +15,3 @@ export function CreateHikeButton({ buttonText }) {
     </Link>
   );
 }
-// todo should this go in the features/hikes ? is ui only for generic compnoents???

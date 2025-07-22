@@ -8,7 +8,7 @@ export function usePersonalChecklist({ hikeId }) {
   });
 
   return {
-    items: data?.items ?? [],
+    personalChecklistItems: data?.data ?? [],
     error,
     isPending,
     isError,

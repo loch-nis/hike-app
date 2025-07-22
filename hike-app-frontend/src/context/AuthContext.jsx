@@ -43,9 +43,10 @@ export function AuthProvider({ children }) {
   async function loadUserFromToken() {
     if (!tokenService.hasToken()) return;
 
+    // NOT SRP - try catch is one thing...
     try {
-      const me = await fetchUserApi();
-      setUser(me);
+      const { user } = await fetchUserApi();
+      setUser(user);
     } catch (error) {
       console.warn("Failed to load user:", error);
       logout();
@@ -60,7 +61,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setToken(null);
     setTokenExpiry(null);
-    setRefreshTimer(null); // todo find out if this is really necessary?!?! I think yes
+    setRefreshTimer(null);
     await logoutApi();
     tokenService.removeTokenAndTokenExpiry();
   }
@@ -88,8 +89,8 @@ export function AuthProvider({ children }) {
         login,
         signup,
         logout,
-        isLoading,
-        isAuthenticated: user !== null,
+        isLoading, // todo make this a hook? also do I use/need this?
+        isAuthenticated: user !== null, // todo make this a hook? the rest all have a hook each
       }}
     >
       {children}

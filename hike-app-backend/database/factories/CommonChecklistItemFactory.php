@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\CommonChecklist;
-use App\Models\HikeUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,39 +20,16 @@ class CommonChecklistItemFactory extends Factory
         return [
             'checklist_id' => CommonChecklist::factory(),
             'is_checked' => fake()->boolean(),
-            'checked_by' => HikeUser::factory(),
+            'checked_by' => null,
             'checked_at' => fake()->randomElement([null, now()]),
             'content' => fake()->randomElement([
-                    "Backpack",
-                    "Water bottle",
-                    "Map",
-                    "Compass",
-                    "GPS device",
-                    "Snacks",
-                    "Trail mix",
-                    "Energy bars",
-                    "Sandwich",
-                    "Multi-tool",
-                    "First aid kit",
-                    "Rain jacket",
-                    "Sunscreen",
-                    "Sunglasses",
-                    "Hat",
-                    "Headlamp",
-                    "Flashlight",
-                    "Extra batteries",
-                    "Portable charger",
-                    "Phone",
-                    "Whistle",
-                    "Insect repellent",
-                    "Trekking poles",
-                    "Gloves",
-                    "Warm layers",
-                    "Emergency blanket",
-                    "Toilet paper",
-                    "Hand sanitizer",
-                    "Trash bag",
-                    "Camera"
+                    "🎒 Backpack", "💧 Water bottle", "🗺️ Map", "🧭 Compass", "📡 GPS device", "🥨 Snacks", "🥜 Trail mix",
+                    "🍫 Energy bars", "🥪 Sandwich", "🛠️ Multi-tool", "🩹 First aid kit", "🌧️ Rain jacket", "🧴 Sunscreen",
+                    "🕶️ Sunglasses", "🧢 Hat", "🔦 Headlamp", "🔦 Flashlight", "🔋 Extra batteries", "🔌 Portable charger",
+                    "📱 Phone", "📯 Whistle", "🦟 Insect repellent", "🥾 Trekking poles", "🧤 Gloves", "🧥 Warm layers",
+                    "🛏️ Sleeping bag", "⛺ Tent", "🪵 Sleeping pad", "🍽️ Lightweight cookware", "🍲 Dehydrated meals",
+                    "🧻 Toilet paper", "🧼 Hand sanitizer", "🗑️ Trash bag", "📷 Camera", "🔥 Firestarter",
+                    "🧽 Biodegradable soap", "🪥 Toothbrush & toothpaste", "👕 Extra clothes"
                 ]
             )
         ];

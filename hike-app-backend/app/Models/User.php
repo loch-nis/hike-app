@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -38,13 +40,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function hikeUsers()
+    public function hikeUsers(): HasMany
     {
         return $this->hasMany(HikeUser::class);
     }
 
     // todo test if this actually works
-    public function hikes()
+    public function hikes(): HasManyThrough
     {
         return $this->hasManyThrough(
             Hike::class,

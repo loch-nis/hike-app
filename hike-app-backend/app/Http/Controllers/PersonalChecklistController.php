@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hike;
-
-// todo validation for everything, but perhaps spatie or something lib is the way to avoid thousands of FormRequests?
+use Illuminate\Http\JsonResponse;
 
 class PersonalChecklistController extends Controller
 {
-    public function show(Hike $hike)
+    public function show(Hike $hike): JsonResponse
     {
         $hikeUser = auth()->user()->hikeUsers()->where('hike_id',
             $hike->id)->first();
 
         $items = $hikeUser->personalChecklist->personalChecklistItems;
-        return response()->json(['data' => $items], 200); // todo fix magic string?
+        return response()->json(['data' => $items]); // todo fix magic string?
     }
 
 }

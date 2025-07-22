@@ -1,5 +1,6 @@
 import { apiClient } from "./apiClient";
 import { authClient } from "./authClient";
+import camelcaseKeys from "camelcase-keys";
 
 export async function loginApi({ email, password }) {
   // axios will throw error automatically
@@ -18,6 +19,7 @@ export async function signupApi({ firstName, lastName, email, password }) {
     email,
     password,
   });
+  // todo use camelcase Keys instead - but the opposite way
   return response.data;
 }
 
@@ -27,7 +29,8 @@ export async function logoutApi() {
 }
 export async function fetchUserApi() {
   const response = await apiClient.get("/auth/me");
-  return response.data;
+  const user = camelcaseKeys(response.data, { deep: true });
+  return { user };
 }
 export async function refreshApi() {
   const response = await apiClient.post("/auth/refresh");

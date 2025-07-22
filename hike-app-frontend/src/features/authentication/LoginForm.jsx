@@ -61,7 +61,7 @@ export function LoginForm() {
           onChange={(event) => setPassword(event.target.value)}
         />
       </FormRow>
-      <Button disabled={isPending}>
+      <Button type="submit" disabled={isPending}>
         {isPending ? <SpinnerMini /> : "Log in"}
       </Button>
     </form>

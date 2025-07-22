@@ -1,6 +1,6 @@
 import { Logo } from "../ui/Logo";
 import { HikeList } from "../features/hikes/components/HikeList";
-import { CreateHikeButton } from "../features/hikes/components/NewHikeButton";
+import { CreateHikeButton } from "../features/hikes/components/CreateHikeButton";
 
 export function Hikes() {
   return (

@@ -42,7 +42,7 @@ export function HikeForm() {
           placeholder="Emails here..."
         />
       </FormRow>
-      <Button disabled={isPending}>
+      <Button type="submit" disabled={isPending}>
         {isPending ? <SpinnerMini /> : "Create hike"}
       </Button>
     </form>
