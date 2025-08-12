@@ -2,45 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PersonalChecklistItemStoreRequest;
 use App\Models\Hike;
 use App\Models\PersonalChecklistItem;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PersonalChecklistItemController extends Controller
 {
-    public function store(Request $request, Hike $hike): JsonResponse
+    public function store(PersonalChecklistItemStoreRequest $request, Hike $hike): JsonResponse
     {
-        // todo validate - FormRequests - with rules?
+        // todo USE and TEST the validation
 
         // todo refactor into either model or service logic -> find out which is best when?!?!
         $hikeUser = auth()->user()->hikeUsers()->where('hike_id', $hike->id)->firstOrFail();
         $checklist = $hikeUser->personalChecklist()->firstOrFail();
         $item = $checklist->personalChecklistItems()->create([
-            'content' => $request['content']
+            'content' => $request['content'],
         ]);
         // todo investigate eager loading
 
         return response()->json($item, 201);
     }
 
-    public function update(PersonalChecklistItem $item): JsonResponse
+    public function update(PersonalChecklistItem $personalChecklistItem): JsonResponse
     {
-        $item->is_checked = !$item->is_checked;
+        $personalChecklistItem->is_checked = ! $personalChecklistItem->is_checked;
 
-        $item->checked_at = now();
+        $personalChecklistItem->checked_at = now();
 
-        $item->save();
+        $personalChecklistItem->save();
 
-        return response()->json($item);
+        return response()->json($personalChecklistItem);
     }
 
-    public function destroy(PersonalChecklistItem $item): JsonResponse
+    public function destroy(PersonalChecklistItem $personalChecklistItem): JsonResponse
     {
         // Route model binding. Throws 404 if not found automatically before this
-        $item->delete();
+        // how does laravel infer model binding? hint its in this file :))
+        $personalChecklistItem->delete();
 
-        return response()->json($item);
+        return response()->json($personalChecklistItem);
     }
-    // todo learn how to write some tests - TDD try out??
 }

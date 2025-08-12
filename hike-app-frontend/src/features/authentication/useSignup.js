@@ -8,8 +8,14 @@ export function useSignup() {
   const navigate = useNavigate();
 
   const { mutate: signup, isPending } = useMutation({
-    mutationFn: ({ firstName, lastName, email, password }) =>
-      signupWithContext({ firstName, lastName, email, password }),
+    mutationFn: ({ firstName, lastName, email, password, passwordConfirm }) =>
+      signupWithContext({
+        firstName,
+        lastName,
+        email,
+        password,
+        passwordConfirm,
+      }),
     onSuccess: async (data, { email, password }) => {
       await loginWithContext({ email, password });
       navigate("/hikes", { replace: true });

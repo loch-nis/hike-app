@@ -7,13 +7,22 @@ use App\Models\User;
 
 class HikePolicy
 {
+    public function __call($name, $arguments)
+    {
+        dump('CREATE NOT FOUND HERE!!!');
+        dump($name);
+    }
+
     public function view(User $user, Hike $hike): bool
     {
-        $isUserConnectedToHike = $user->hikeUsers()->where("hike_id", $hike->id)->exists();
-        if ($isUserConnectedToHike) {
+        return $this->isUserConnectedToHike($user, $hike);
+    }
+
+    private function isUserConnectedToHike(User $user, Hike $hike): bool
+    {
+        if ($user->hikes->find($hike)) {
             return true;
         }
-
 
         return false;
     }
@@ -27,5 +36,4 @@ class HikePolicy
     {
         return false;
     }
-
 }

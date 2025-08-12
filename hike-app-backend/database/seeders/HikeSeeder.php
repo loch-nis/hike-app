@@ -28,7 +28,7 @@ class HikeSeeder extends Seeder
             ->create();
 
         CommonChecklistItem::factory()
-            ->for($commonChecklist, 'checklist')
+            ->for($commonChecklist)
             ->count(10)
             ->create();
 
@@ -40,7 +40,7 @@ class HikeSeeder extends Seeder
                 ->create();
 
             PersonalChecklistItem::factory()
-                ->for($personalChecklist, 'checklist')
+                ->for($personalChecklist)
                 ->count(20)
                 ->create();
         }

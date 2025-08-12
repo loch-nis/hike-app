@@ -53,8 +53,8 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function signup({ firstName, lastName, email, password }) {
-    return signupApi({ firstName, lastName, email, password });
+  function signup({ firstName, lastName, email, password, passwordConfirm }) {
+    return signupApi({ firstName, lastName, email, password, passwordConfirm });
   }
 
   async function logout() {

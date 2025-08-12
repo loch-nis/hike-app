@@ -10,9 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CommonChecklist extends Model
 {
-    use HasUuid;
     use HasFactory;
-
+    use HasUuid;
 
     public function hike(): BelongsTo
     {
@@ -21,7 +20,6 @@ class CommonChecklist extends Model
 
     public function commonChecklistItems(): HasMany
     {
-        return $this->hasMany(CommonChecklistItem::class,
-            'checklist_id'); // because it's not called common_checklist_id. Although in my next project, I should probably just follow convention to avoid this in the first place
+        return $this->hasMany(CommonChecklistItem::class);
     }
 }

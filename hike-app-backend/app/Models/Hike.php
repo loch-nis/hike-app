@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Hike extends Model
 {
-    use HasUuid;
     use HasFactory;
+    use HasUuid;
 
     // todo this is not secure for prod - perhaps add "unguarded::" to the seeder?
     protected $fillable = ['title'];
@@ -25,5 +25,17 @@ class Hike extends Model
     public function commonChecklist(): HasOne
     {
         return $this->hasOne(CommonChecklist::class);
+    }
+
+    // todo write and test a users(): HasManyThrough method?
+
+    public function firstPersonalChecklistItem(): PersonalChecklistItem
+    {
+        return $this->hikeUsers->first()->personalChecklist->personalChecklistItems->first();
+    }
+
+    public function firstCommonChecklistItem(): CommonChecklistItem
+    {
+        return $this->commonChecklist->commonChecklistItems->first();
     }
 }

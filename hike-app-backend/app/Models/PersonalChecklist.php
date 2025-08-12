@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PersonalChecklist extends Model
 {
-    use HasUuid;
     use HasFactory;
+    use HasUuid;
 
     protected $fillable = ['hike_user_id'];
 
@@ -22,6 +22,6 @@ class PersonalChecklist extends Model
 
     public function personalChecklistItems(): HasMany
     {
-        return $this->hasMany(PersonalChecklistItem::class, 'checklist_id');
+        return $this->hasMany(PersonalChecklistItem::class);
     }
 }

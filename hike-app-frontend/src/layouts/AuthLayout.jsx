@@ -1,14 +1,21 @@
 import { Outlet } from "react-router-dom";
 
 export function AuthLayout() {
-  // todo change bg picture here to one of my own - maybe from an actual hike I've been on?!?! and remove the firewatch stuff so no copyright
+  const images = ["canada.png", "sweden-forest.png", "sweden-camp.png"];
+  const randomIndex = Math.floor(Math.random() * 3);
+  const randomImage = images[randomIndex];
+  console.log(randomImage);
+
   return (
-    <div className="flex h-screen justify-center bg-cover bg-center lg:justify-end lg:bg-[url(/wide-wallpaper.png)]">
+    <div className="flex h-screen">
+      <div
+        className={`hidden bg-cover bg-center lg:block lg:w-2/3`}
+        style={{ backgroundImage: `url(/${randomImage})` }}
+      ></div>
       <div className="flex max-h-full bg-white lg:w-1/3">
         <Outlet />
       </div>
     </div>
   );
 }
-
-// todo check if good with a folder called layouts
+// todo fix weird behavoir on small screens

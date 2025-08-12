@@ -18,7 +18,7 @@ class PersonalChecklistItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'checklist_id' => PersonalChecklist::factory(),
+            'personal_checklist_id' => PersonalChecklist::factory(),
             'is_checked' => fake()->boolean(30),
             'checked_at' => fake()->randomElement([null, now()]),
             'content' => fake()->randomElement([

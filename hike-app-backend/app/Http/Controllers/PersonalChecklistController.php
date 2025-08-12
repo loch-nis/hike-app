@@ -10,10 +10,10 @@ class PersonalChecklistController extends Controller
     public function show(Hike $hike): JsonResponse
     {
         $hikeUser = auth()->user()->hikeUsers()->where('hike_id',
-            $hike->id)->first();
+            $hike->id)->firstOrFail();
 
         $items = $hikeUser->personalChecklist->personalChecklistItems;
+
         return response()->json(['data' => $items]); // todo fix magic string?
     }
-
 }

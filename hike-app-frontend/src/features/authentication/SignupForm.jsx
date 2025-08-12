@@ -10,9 +10,9 @@ export function SignupForm() {
   const { register, formState, handleSubmit, getValues, reset } = useForm();
   const { errors } = formState;
 
-  function onSubmit({ firstName, lastName, email, password }) {
+  function onSubmit({ firstName, lastName, email, password, passwordConfirm }) {
     signup(
-      { firstName, lastName, email, password },
+      { firstName, lastName, email, password, passwordConfirm },
       {
         onSettled: () => {
           reset();

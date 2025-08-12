@@ -18,7 +18,7 @@ class CommonChecklistItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'checklist_id' => CommonChecklist::factory(),
+            'common_checklist_id' => CommonChecklist::factory(),
             'is_checked' => fake()->boolean(),
             'checked_by' => null,
             'checked_at' => fake()->randomElement([null, now()]),

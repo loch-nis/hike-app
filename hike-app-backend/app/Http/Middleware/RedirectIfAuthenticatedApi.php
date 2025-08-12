@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticatedApi
 {
@@ -16,8 +16,7 @@ class RedirectIfAuthenticatedApi
      */
     public function handle(Request $request, Closure $next, $guard = 'api'): Response
     {
-        if (Auth::guard($guard)->check()) 
-        {
+        if (Auth::guard($guard)->check()) {
             return response()->json(['message' => 'Already authenticated'], 403);
         }
 

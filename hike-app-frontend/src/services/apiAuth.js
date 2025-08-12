@@ -12,12 +12,19 @@ export async function loginApi({ email, password }) {
   return response.data;
 }
 
-export async function signupApi({ firstName, lastName, email, password }) {
+export async function signupApi({
+  firstName,
+  lastName,
+  email,
+  password,
+  passwordConfirm,
+}) {
   const response = await authClient.post("/auth/register", {
     first_name: firstName,
     last_name: lastName,
     email,
     password,
+    password_confirmation: passwordConfirm,
   });
   // todo use camelcase Keys instead - but the opposite way
   return response.data;

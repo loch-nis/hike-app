@@ -3,55 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Events\CommonChecklistUpdated;
+use App\Http\Requests\CommonChecklistItemStoreRequest;
 use App\Models\CommonChecklistItem;
 use App\Models\Hike;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class CommonChecklistItemController extends Controller
 {
-    public function store(Request $request, Hike $hike): JsonResponse
+    public function store(CommonChecklistItemStoreRequest $request, Hike $hike): JsonResponse
     {
-        $checklist = $hike->commonChecklist;
+        $commonChecklist = $hike->commonChecklist;
 
-        $item = $checklist->commonChecklistItems()->create([
-            'content' => $request['content']
-        ]);
+        $commonChecklistItem = $commonChecklist->commonChecklistItems()->create([
+            'content' => $request['content'],
+        ]); // todo use the factory here? why or why not?!
 
         // todo for all three: add ->toOthers() ?? and test
-        CommonChecklistUpdated::broadcast($checklist->id);
+        CommonChecklistUpdated::broadcast($commonChecklist->getKey());
 
-        return response()->json($item);
+        return response()->json($commonChecklistItem);
     }
 
-    public function update(CommonChecklistItem $item): JsonResponse
+    public function update(CommonChecklistItem $commonChecklistItem): JsonResponse
     {
-        $item->is_checked = !$item->is_checked;
+        $commonChecklistItem->toggleIsChecked();
 
-        $item->checked_at = now();
+        $commonChecklistItem->checked_at = now();
 
-        $checklist = $item->checklist;
-
-        $hike = $checklist->hike;
+        $commonChecklist = $commonChecklistItem->commonChecklist;
 
         $hikeUser = auth()->user()->hikeUsers()->where('hike_id',
-            $hike->id)->first();
+            $commonChecklist->hike->id)->first();
 
-        $item->checked_by = $hikeUser->id;
+        $commonChecklistItem->checked_by = $hikeUser->id;
+        $commonChecklistItem->save();
 
-        $item->save();
+        CommonChecklistUpdated::broadcast($commonChecklist->getKey());
 
-        CommonChecklistUpdated::broadcast($checklist->id);
-
-        return response()->json($item);
+        return response()->json($commonChecklistItem);
     }
 
-    public function destroy(CommonChecklistItem $item): JsonResponse
+    public function destroy(CommonChecklistItem $commonChecklistItem): JsonResponse
     {
-        $item->delete();
+        $commonChecklistItem->delete();
 
-        CommonChecklistUpdated::broadcast($item->checklist->id);
+        CommonChecklistUpdated::broadcast($commonChecklistItem->commonChecklist->getKey());
 
-        return response()->json($item);
+        return response()->json($commonChecklistItem);
     }
 }

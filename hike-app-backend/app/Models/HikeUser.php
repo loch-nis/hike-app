@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class HikeUser extends Model
 {
-    use HasUuid;
     use HasFactory;
+    use HasUuid;
 
     public $timestamps = false;
 
@@ -28,17 +28,16 @@ class HikeUser extends Model
         return $this->hasOne(PersonalChecklist::class);
     }
 
-    // todo I dont think this works? perhaps test
+    // todo I dont think this works? perhaps test - but honestly I'm not using it?
     public function checkedItems(): HasMany
     {
         return $this->hasMany(CommonChecklistItem::class);
     }
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
 
     public function hike(): BelongsTo
     {

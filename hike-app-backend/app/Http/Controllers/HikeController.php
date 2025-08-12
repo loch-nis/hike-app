@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HikeStoreRequest;
 use App\Models\Hike;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class HikeController extends Controller
 {
@@ -15,8 +15,9 @@ class HikeController extends Controller
         return response()->json($hikes);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(HikeStoreRequest $request): JsonResponse
     {
+        // todo use Hike::factory()->create([xx]) here instead? or what is the difference?
         $hike = Hike::create([
             'title' => $request['title'],
         ]);

@@ -12,4 +12,5 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([HikeSeeder::class]);
     }
+
 }
