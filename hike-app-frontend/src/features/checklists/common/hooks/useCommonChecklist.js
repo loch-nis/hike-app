@@ -16,5 +16,4 @@ export function useCommonChecklist({ hikeId }) {
   };
 }
 
-// todo can I reuse logic for personal and common hooks???
-// or maybe just don't. do this later if it makes sense..
+// todo can I reuse logic for personal and common hooks? or maybe just don't. do this later if it makes sense..

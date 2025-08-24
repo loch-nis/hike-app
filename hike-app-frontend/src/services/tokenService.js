@@ -13,7 +13,8 @@ export function removeToken() {
   localStorage.removeItem(TOKEN_KEY);
 }
 
-export function setTokenExpiry(expiry) {
+export function setTokenExpiry(expiresIn, currentTimeInMs = Date.now()) {
+  const expiry = currentTimeInMs + expiresIn * 1000;
   localStorage.setItem(TOKEN_EXPIRY_KEY, expiry.toString());
 }
 
@@ -31,12 +32,17 @@ export function removeTokenAndTokenExpiry() {
   removeTokenExpiry();
 }
 
-export function hasToken() {
+export function isTokenSet() {
   return getToken() !== null;
 }
 
+// todo good cases for a unit tests:
 export function isTokenExpired() {
   const expiry = getTokenExpiry();
   return expiry ? Date.now() > expiry : true;
-  // todo not sure if working!
+}
+
+export function calculateTokenRefreshDelay() {
+  const oneMinuteBuffer = 60_000;
+  return getTokenExpiry() - Date.now() - oneMinuteBuffer;
 }

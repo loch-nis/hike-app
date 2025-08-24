@@ -4,8 +4,6 @@ import { SignupForm } from "../features/authentication/SignupForm";
 import { Heading } from "../ui/Heading";
 
 export function Signup() {
-  // todo have authLayout or authPageLayout include more of these wrapper divs
-
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center lg:px-6 lg:py-12">

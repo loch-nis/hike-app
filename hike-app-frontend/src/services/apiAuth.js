@@ -26,7 +26,8 @@ export async function signupApi({
     password,
     password_confirmation: passwordConfirm,
   });
-  // todo use camelcase Keys instead - but the opposite way
+  // todo use camelcase Keys instead - but the opposite way. Snake case?
+
   return response.data;
 }
 
@@ -37,7 +38,7 @@ export async function logoutApi() {
 export async function fetchUserApi() {
   const response = await apiClient.get("/auth/me");
   const user = camelcaseKeys(response.data, { deep: true });
-  return { user };
+  return { user }; // todo this is the only place where it returns an obj. Fix inconsistency
 }
 export async function refreshApi() {
   const response = await apiClient.post("/auth/refresh");

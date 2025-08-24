@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\CommonChecklistItem;
+use App\Models\Hike;
+use App\Models\HikeUser;
+use App\Models\PersonalChecklistItem;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 // todo naming
@@ -16,7 +21,7 @@ class HikeRecommendationSeeder extends Seeder
         // should it be a seeder though or a template feature when creating a hike??!
         // with emojis ?!
 
-        $arr = [
+        $personalItems = [
             '🛏️ Sovepose',
             '🧤 Inderpose (især vinter)',
             '🧽 Liggeunderlag',
@@ -31,7 +36,9 @@ class HikeRecommendationSeeder extends Seeder
             '🧥 Varmt tøj + undertøj',
             '🥾 Sko/støvler',
             '🎁 Overraskelse!',
+        ];
 
+        $commonItems = [
             // common
             '⛺ Telt/tarp hvis usikker overnatning',
             '🪓 Økse og evt. sav',
@@ -61,5 +68,22 @@ class HikeRecommendationSeeder extends Seeder
             '🍫 Kakao',
             '🧨 Tændblokke til bål',
         ];
+
+        // es@cia.gov user for the seeded hike
+        $hikeUser = HikeUser::query()->find('b13abde6-e015-4faa-8a02-901a0fb6c5d5');
+
+        foreach ($personalItems as $item) {
+            PersonalChecklistItem::factory()
+                ->for($hikeUser->personalChecklist)
+                ->create(['content' => $item]);
+        }
+
+        $hike = Hike::query()->find('8bf5e3f1-3a2e-4486-b075-58c5f10b4d72');
+
+        foreach ($commonItems as $item) {
+            CommonChecklistItem::factory()
+                ->for($hike->commonChecklist)
+                ->create(['content' => $item]);
+        }
     }
 }

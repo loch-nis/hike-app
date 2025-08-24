@@ -2,7 +2,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-export function CreateHikeButton({ buttonText }) {
+export function CreateHikeButton({ children }) {
   return (
     <Link
       to={"/hikes/create"}
@@ -11,7 +11,7 @@ export function CreateHikeButton({ buttonText }) {
       <span className="mr-[10px]">
         <FontAwesomeIcon icon={faPlus} />
       </span>
-      <span>{buttonText}</span>
+      <span>{children}</span>
     </Link>
   );
 }

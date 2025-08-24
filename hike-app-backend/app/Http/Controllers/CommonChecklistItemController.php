@@ -15,11 +15,11 @@ class CommonChecklistItemController extends Controller
         $commonChecklist = $hike->commonChecklist;
 
         $commonChecklistItem = $commonChecklist->commonChecklistItems()->create([
-            'content' => $request['content'],
-        ]); // todo use the factory here? why or why not?!
+            'content' => $request->validated('content'),
+        ]);
 
         // todo for all three: add ->toOthers() ?? and test
-        CommonChecklistUpdated::broadcast($commonChecklist->getKey());
+        CommonChecklistUpdated::broadcast($commonChecklist->id);
 
         return response()->json($commonChecklistItem);
     }

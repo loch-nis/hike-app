@@ -6,5 +6,5 @@ export const authClient = axios.create({
   /* headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-  }, */ //todo this should be default with axious, unlike fetch
+  }, */ // this should be default with axios, as opposed to fetch
 });

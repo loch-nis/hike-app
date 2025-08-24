@@ -16,6 +16,8 @@ class HikeSeeder extends Seeder
     public function run(): void
     {
         // todo investigate seeder naming and best practice types
+
+        // todo should set one of these users to have the owner role if I were to use the roles
         $hike = Hike::factory()
             ->has(HikeUser::factory()
                 ->for(User::factory()->state(['email' => 'es@cia.gov'])))
@@ -44,7 +46,6 @@ class HikeSeeder extends Seeder
                 ->count(20)
                 ->create();
         }
-
 
     }
 }

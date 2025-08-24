@@ -23,12 +23,13 @@ Route::prefix('api')->middleware('api')->group(function () {
             ->name('hikes.show');
 
         Route::get('hikes/{hike}/me/personal-checklist', [PersonalChecklistController::class, 'show'])
-            ->can('view', 'hike') // todo is there a reason to check this on the personal checklist policy instead? no because the auth check is the same on both, so that would not be DRY. And this is the way the whole thing is set up, so no point in trying to future proof EVERYTHING CHANGING. YAGNI ftw
+            ->can('view', 'hike') // todo is there a reason to check this on the personal checklist policy instead? no because the auth check is the same on both, so that would not be DRY. And
+            // this is the way the whole thing is set up, so no point in trying to future proof EVERYTHING CHANGING. YAGNI ftw
             ->name('personal-checklist.show');
 
         Route::post('hikes/{hike}/me/personal-checklist-items', [PersonalChecklistItemController::class, 'store'])
-            ->can('create', [PersonalChecklistItem::class, 'hike']) // why does this work? :D
-            ->name('personal-checklist-items.store'); // todo wait check if the name of route should be store or create?!
+            ->can('create', [PersonalChecklistItem::class, 'hike']) // self-quiz: why does this work?
+            ->name('personal-checklist-items.store');
 
         Route::patch('personal-checklist-items/{personalChecklistItem}',
             [PersonalChecklistItemController::class, 'update'])
@@ -43,14 +44,16 @@ Route::prefix('api')->middleware('api')->group(function () {
         // todo policies and names for all these routes (and TDD (BDD naming!) tests!!)
         Route::get('hikes/{hike}/common-checklist', [CommonChecklistController::class, 'show'])
             ->name('common-checklist.show');
+
         Route::post('hikes/{hike}/common-checklist-items', [CommonChecklistItemController::class, 'store'])
             ->name('common-checklist-items.store');
+
         Route::patch('common-checklist-items/{commonChecklistItem}', [CommonChecklistItemController::class, 'update'])
             ->name('common-checklist-items.update');
+
         Route::delete('common-checklist-items/{commonChecklistItem}',
             [CommonChecklistItemController::class, 'destroy'])
             ->name('common-checklist-items.destroy');
-
     });
 
     Route::prefix('auth')->group(function () {

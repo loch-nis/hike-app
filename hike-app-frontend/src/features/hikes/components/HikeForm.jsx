@@ -17,8 +17,7 @@ export function HikeForm() {
     createHike({ title });
   }
 
-  // todo - for the email field, I could make it a Tags Input like https://github.com/shadcn-ui/ui/issues/3647
-  // todo and then it could look up the email immidiately, and be green and show the user first name if found, otherwise send an email with mailgun and invite to the app
+  // todo - for the email field, I could make it a Tags Input like https://github.com/shadcn-ui/ui/issues/3647 and then it could look up the email immidiately, and be green and show the user first name if found, otherwise send an email with mailgun containing an invite to the app
 
   return (
     <form className="space-y-6" onSubmit={(event) => handleSubmit(event)}>

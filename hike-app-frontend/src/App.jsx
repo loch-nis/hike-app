@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HikeDetails } from "./pages/HikeDetails";
 import { Hikes } from "./pages/Hikes";
 import { PageNotFound } from "./pages/PageNotFound";
@@ -63,6 +63,7 @@ export function App() {
               <Route path="hikes/create" element={<CreateHike />} />
               <Route path="hikes/:hikeId" element={<HikeDetails />} />
             </Route>
+            <Route path="/" element={<Navigate to={"hikes"} replace />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

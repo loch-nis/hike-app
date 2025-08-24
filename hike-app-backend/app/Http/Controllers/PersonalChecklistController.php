@@ -14,6 +14,6 @@ class PersonalChecklistController extends Controller
 
         $items = $hikeUser->personalChecklist->personalChecklistItems;
 
-        return response()->json(['data' => $items]); // todo fix magic string?
+        return response()->json(['data' => $items]);
     }
 }

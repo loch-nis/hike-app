@@ -45,8 +45,6 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(HikeUser::class);
     }
 
-    // todo test if this actually works - seems like it does?! - I think a unit test would suitable, no?
-    // no unit test, still feature cos the db is hit. and yes, the test confirms it works
     public function hikes(): HasManyThrough
     {
         return $this->hasManyThrough(

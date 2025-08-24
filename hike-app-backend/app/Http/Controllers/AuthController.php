@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -70,19 +69,14 @@ class AuthController extends Controller
         return $this->respondWithToken(auth()->refresh());
     }
 
-    public function register(RegisterRequest $request)
+    public function register(RegisterUserRequest $request)
     {
-        // todo fixxxx!!
-
         $validated = $request->validated();
 
-        $validated['password'] = Hash::make($validated['password']);
-
-        $user = User::create($validated);
+        User::query()->create($validated);
 
         return response()->json([
-            'message' => 'Registration successful. Please log in.',
-            'user' => $user,
+            'message' => 'Registration successful.',
         ], 201);
     }
 }

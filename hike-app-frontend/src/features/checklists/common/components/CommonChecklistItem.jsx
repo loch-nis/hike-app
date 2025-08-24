@@ -36,4 +36,4 @@ export function CommonChecklistItem({ item }) {
     </li>
   );
 }
-// todo prolly extract the ui into a shared "checklistItem" component?!
+// todo extract the ui into a shared "checklistItem" component?! Do be careful of premature optimization / YAGNI

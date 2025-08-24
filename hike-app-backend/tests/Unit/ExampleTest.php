@@ -4,7 +4,4 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
-{
-    // todo unit tests with PEST??
-}
+class ExampleTest extends TestCase {}

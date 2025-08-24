@@ -8,4 +8,4 @@ export function Button({ className = "", children, ...props }) {
     </button>
   );
 }
-// todo probably change this string literal method to twMerge instead
+// todo change this string literal method to use twMerge instead

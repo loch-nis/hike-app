@@ -16,4 +16,3 @@ export function AppLayout() {
     </>
   );
 }
-// todo parchment as bg? Or just the color?

@@ -15,7 +15,7 @@ export function PersonalChecklist({ hikeId }) {
   if (isPending) return <Spinner />;
 
   const amountOfItemsChecked = items.filter(
-    (item) => item.isChecked === 1,
+    (item) => item.isChecked === true,
   ).length;
 
   const percentageOfItemsChecked = (amountOfItemsChecked / items.length) * 100;

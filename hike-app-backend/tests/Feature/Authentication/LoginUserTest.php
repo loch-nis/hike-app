@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+
 use function Pest\Laravel\postJson;
 
 it('logs in a user with valid credentials', function () {
@@ -24,7 +25,6 @@ it('logs in a user with valid credentials', function () {
     expect($response['access_token'])->toBeString();
 });
 
-
 it('rejects invalid credentials', function () {
     $email = 'example@email.com';
     $password = 'examplePassword';
@@ -37,3 +37,5 @@ it('rejects invalid credentials', function () {
     postJson(route('login'), $invalidCredentials)
         ->assertUnauthorized();
 });
+
+// todo describe(guest) and describe(auth) or just another test trying to log in when already auth. or wait is there any reason to test that here? maybe its a frontend thing.

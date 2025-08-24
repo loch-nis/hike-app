@@ -8,7 +8,7 @@ export function Hikes() {
       <Logo />
       <div className="flex flex-col items-center gap-2">
         <HikeList />
-        <CreateHikeButton buttonText={"New hike"} />
+        <CreateHikeButton>New hike</CreateHikeButton>
       </div>
     </>
   );

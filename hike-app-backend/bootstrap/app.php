@@ -6,7 +6,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
-
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -22,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             '/api/common-checklist-items/*',
             '/api/auth/*',
             '/broadcasting/auth',
-            // todo set up CSRF !!!
+            // there should be no need for CSRF protection since I have a separate frontend.
         ]);
         $middleware->alias([
             'guest.api' => RedirectIfAuthenticatedApi::class,

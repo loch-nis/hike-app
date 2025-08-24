@@ -4,7 +4,6 @@ import { LoginForm } from "../features/authentication/LoginForm";
 import { Heading } from "../ui/Heading";
 
 export function Login() {
-  // todo fix weird cut out of logo and no pb on zoom 125% ?? or just ignore??
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center lg:px-6 lg:py-12">
       <Logo />

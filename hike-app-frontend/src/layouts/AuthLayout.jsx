@@ -4,7 +4,6 @@ export function AuthLayout() {
   const images = ["canada.png", "sweden-forest.png", "sweden-camp.png"];
   const randomIndex = Math.floor(Math.random() * 3);
   const randomImage = images[randomIndex];
-  console.log(randomImage);
 
   return (
     <div className="flex h-screen">
@@ -18,4 +17,4 @@ export function AuthLayout() {
     </div>
   );
 }
-// todo fix weird behavoir on small screens
+// todo fix weird behavior on smaller screens

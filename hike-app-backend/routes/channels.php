@@ -9,10 +9,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('commonChecklist.{commonChecklistId}', function (User $user, string $commonChecklistId) {
-    $hike = CommonChecklist::findOrFail($commonChecklistId)->hike;
+    $hike = CommonChecklist::query()->findOrFail($commonChecklistId)->hike;
 
     return $user->can('view', $hike);
-    // todo test that this actually guards correctly - use PEST or is another testing framework better?
 });
-
-

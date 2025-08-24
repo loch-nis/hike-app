@@ -12,7 +12,7 @@ export function CommonChecklist({ commonChecklistId, items }) {
   );
 
   const amountOfItemsChecked = items.filter(
-    (item) => item.isChecked === 1,
+    (item) => item.isChecked === true,
   ).length;
 
   const percentageOfItemsChecked = (amountOfItemsChecked / items.length) * 100;

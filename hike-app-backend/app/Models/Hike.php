@@ -6,6 +6,7 @@ use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Hike extends Model
@@ -13,7 +14,6 @@ class Hike extends Model
     use HasFactory;
     use HasUuid;
 
-    // todo this is not secure for prod - perhaps add "unguarded::" to the seeder?
     protected $fillable = ['title'];
 
     public function hikeUsers(): HasMany
@@ -27,7 +27,17 @@ class Hike extends Model
         return $this->hasOne(CommonChecklist::class);
     }
 
-    // todo write and test a users(): HasManyThrough method?
+    public function users(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            User::class,
+            HikeUser::class,
+            'hike_id',
+            'id',
+            'id',
+            'user_id',
+        );
+    }
 
     public function firstPersonalChecklistItem(): PersonalChecklistItem
     {

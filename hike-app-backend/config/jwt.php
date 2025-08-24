@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 5), // 5 min for showcasing purposes, 15 likely a better choice. todo e2e test the refresh logic with Playwright - using TTL = 2
 
     /*
     |--------------------------------------------------------------------------

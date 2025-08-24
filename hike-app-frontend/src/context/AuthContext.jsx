@@ -1,6 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useState } from "react";
-import * as tokenService from "../services/tokenService";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  setToken,
+  getToken,
+  removeToken,
+  setTokenExpiry,
+  getTokenExpiry,
+  removeTokenExpiry,
+  removeTokenAndTokenExpiry,
+  isTokenSet,
+  isTokenExpired,
+  calculateTokenRefreshDelay,
+} from "../services/tokenService";
 import {
   loginApi,
   logoutApi,
@@ -12,45 +23,50 @@ import {
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState(() => tokenService.getToken());
-  // do I really need this tho??
-  const [tokenExpiry, setTokenExpiry] = useState(() =>
-    tokenService.getTokenExpiry(),
-  );
+  const [isAuthReady, setIsAuthReady] = useState(false);
   const [user, setUser] = useState(null);
-  const [refreshTimer, setRefreshTimer] = useState(null);
+  const refreshTimerRef = useRef(null);
+
+  useEffect(function () {
+    resumeSession(); // self-quiz: Why should this be in an effect?
+
+    return clearScheduledRefresh; // self-quiz: what kind of function is this? And when does it run?
+  }, []);
+
+  async function resumeSession() {
+    if (!isTokenSet()) {
+      setIsAuthReady(true);
+      return;
+    }
+
+    if (isTokenExpired()) {
+      logout();
+      setIsAuthReady(true);
+      return;
+    }
+
+    scheduleTokenRefresh();
+    await resolveUserFromToken();
+    setIsAuthReady(true);
+  }
 
   async function login({ email, password }) {
-    const { access_token: newToken, expires_in } = await loginApi({
+    const { access_token: newToken, expires_in: expiresIn } = await loginApi({
       email,
       password,
     });
 
     setToken(newToken);
-    tokenService.setToken(newToken);
-    const tokenExpiry = calculateTokenExpiry(expires_in);
-    setTokenExpiry(tokenExpiry);
-    tokenService.setTokenExpiry(tokenExpiry);
-    // schedule refresh?! or just use the timer directly?!
-    await loadUserFromToken();
+    setTokenExpiry(expiresIn);
+    scheduleTokenRefresh();
+    await resolveUserFromToken();
   }
 
-  function calculateTokenExpiry(expiresIn, currentTimeInMs = Date.now()) {
-    return currentTimeInMs + expiresIn * 1000;
-  }
+  async function resolveUserFromToken() {
+    if (!isTokenSet()) return;
 
-  async function loadUserFromToken() {
-    if (!tokenService.hasToken()) return;
-
-    // NOT SRP - try catch is one thing...
-    try {
-      const { user } = await fetchUserApi();
-      setUser(user);
-    } catch (error) {
-      console.warn("Failed to load user:", error);
-      logout();
-    }
+    const { user } = await fetchUserApi();
+    setUser(user);
   }
 
   function signup({ firstName, lastName, email, password, passwordConfirm }) {
@@ -59,28 +75,33 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     setUser(null);
-    setToken(null);
-    setTokenExpiry(null);
-    setRefreshTimer(null);
+    clearScheduledRefresh();
     await logoutApi();
-    tokenService.removeTokenAndTokenExpiry();
+    removeTokenAndTokenExpiry();
   }
 
-  // todo handle refresh
+  function scheduleTokenRefresh() {
+    if (refreshTimerRef.current) clearTimeout(refreshTimerRef.current);
 
-  useEffect(function () {
-    async function initSession() {
-      if (!token) {
-        setIsLoading(false);
-        return; // is this necessary when it is checked in loadUser?!?! mayb yes, but only for sched refresh sake?!?
-      }
-      await loadUserFromToken();
+    const refreshDelay = calculateTokenRefreshDelay();
 
-      // scheduleRefresh();
-      setIsLoading(false);
+    refreshTimerRef.current = setTimeout(async () => {
+      const { access_token: newToken, expires_in: expiresIn } =
+        await refreshApi();
+
+      setToken(newToken);
+      setTokenExpiry(expiresIn);
+
+      scheduleTokenRefresh();
+    }, refreshDelay);
+  }
+
+  function clearScheduledRefresh() {
+    if (refreshTimerRef.current) {
+      clearTimeout(refreshTimerRef.current);
+      refreshTimerRef.current = null;
     }
-    initSession(); // fix naming
-  }, []);
+  }
 
   return (
     <AuthContext.Provider
@@ -89,8 +110,8 @@ export function AuthProvider({ children }) {
         login,
         signup,
         logout,
-        isLoading, // todo make this a hook? also do I use/need this?
-        isAuthenticated: user !== null, // todo make this a hook? the rest all have a hook each
+        isAuthReady,
+        isAuthenticated: user !== null,
       }}
     >
       {children}

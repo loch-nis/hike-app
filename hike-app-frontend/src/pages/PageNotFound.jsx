@@ -1,3 +1,5 @@
+import { Heading } from "../ui/Heading";
+
 export function PageNotFound() {
-  return <div>404 Not Found</div>;
+  return <Heading>404 Not Found</Heading>;
 }
