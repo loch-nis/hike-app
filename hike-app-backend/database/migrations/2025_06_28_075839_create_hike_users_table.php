@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->timestamp('joined_at')->nullable();
         });
+        // todo investigate constraints to enforce a one to one relationship with this and personal checklists?
     }
 
     /**

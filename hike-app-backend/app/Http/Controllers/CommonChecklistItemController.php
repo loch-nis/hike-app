@@ -18,7 +18,7 @@ class CommonChecklistItemController extends Controller
             'content' => $request->validated('content'),
         ]);
 
-        // todo for all three: add ->toOthers() ?? and test
+        // todo-X for all three: add ->toOthers() ?? and test
         CommonChecklistUpdated::broadcast($commonChecklist->id);
 
         return response()->json($commonChecklistItem);
@@ -38,7 +38,7 @@ class CommonChecklistItemController extends Controller
         $commonChecklistItem->checked_by = $hikeUser->id;
         $commonChecklistItem->save();
 
-        CommonChecklistUpdated::broadcast($commonChecklist->getKey());
+        CommonChecklistUpdated::broadcast($commonChecklist->id);
 
         return response()->json($commonChecklistItem);
     }
@@ -47,7 +47,7 @@ class CommonChecklistItemController extends Controller
     {
         $commonChecklistItem->delete();
 
-        CommonChecklistUpdated::broadcast($commonChecklistItem->commonChecklist->getKey());
+        CommonChecklistUpdated::broadcast($commonChecklistItem->commonChecklist->id);
 
         return response()->json($commonChecklistItem);
     }

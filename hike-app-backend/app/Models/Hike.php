@@ -16,12 +16,6 @@ class Hike extends Model
 
     protected $fillable = ['title'];
 
-    public function hikeUsers(): HasMany
-    {
-
-        return $this->hasMany(HikeUser::class);
-    }
-
     public function commonChecklist(): HasOne
     {
         return $this->hasOne(CommonChecklist::class);
@@ -37,6 +31,22 @@ class Hike extends Model
             'id',
             'user_id',
         );
+    }
+
+    public function personalChecklistFor(User $user): PersonalChecklist
+    {
+        // todo also a great case for eager loading with the personalChecklist I believe
+        $hikeUser = $this->hikeUsers()
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        return $hikeUser->personalChecklist()->firstOrFail();
+    }
+
+    public function hikeUsers(): HasMany
+    {
+
+        return $this->hasMany(HikeUser::class);
     }
 
     public function firstPersonalChecklistItem(): PersonalChecklistItem

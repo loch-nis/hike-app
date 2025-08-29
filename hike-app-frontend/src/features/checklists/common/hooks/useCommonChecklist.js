@@ -10,6 +10,7 @@ export function useCommonChecklist({ hikeId }) {
   return {
     commonChecklistItems: data?.data ?? [],
     commonChecklist: data?.checklist ?? {},
+    isCommonChecklistReady: !isPending && !isError && data,
     error,
     isPending,
     isError,

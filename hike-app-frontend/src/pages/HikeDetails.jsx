@@ -13,9 +13,10 @@ import { useCommonChecklist } from "../features/checklists/common/hooks/useCommo
 export function HikeDetails() {
   const { hikeId = "" } = useParams();
   const { hike, error, isPending, isError } = useHike({ hikeId });
-  const { commonChecklistItems, commonChecklist } = useCommonChecklist({
-    hikeId,
-  });
+  const { commonChecklistItems, commonChecklist, isCommonChecklistReady } =
+    useCommonChecklist({
+      hikeId,
+    });
 
   return (
     <>
@@ -33,7 +34,7 @@ export function HikeDetails() {
               <PersonalChecklistForm hikeId={hikeId} />
             </ChecklistBox>
             <ChecklistBox>
-              {commonChecklist && (
+              {isCommonChecklistReady && (
                 <CommonChecklist
                   commonChecklistId={commonChecklist.id}
                   items={commonChecklistItems}

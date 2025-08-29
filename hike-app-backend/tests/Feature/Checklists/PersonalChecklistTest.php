@@ -112,7 +112,3 @@ describe('when unauthorized', function () {
             ->assertForbidden();
     });
 });
-
-// todo each beforeEach should only create the bare minimum for what its tests need. Otherwise nest if different needs needs needs needs needs needs
-// best practice is to use a mix of in-test arranging and beforeEach
-// so reason for it in this file

@@ -11,15 +11,14 @@ class PersonalChecklistItemController extends Controller
 {
     public function store(PersonalChecklistItemStoreRequest $request, Hike $hike): JsonResponse
     {
-        // todo refactor into either model or service logic -> find out which is best when?!?!
-        $hikeUser = auth()->user()->hikeUsers()->where('hike_id', $hike->id)->firstOrFail();
-        $checklist = $hikeUser->personalChecklist()->firstOrFail();
-        $item = $checklist->personalChecklistItems()->create([
+        $personalChecklist = $hike->personalChecklistFor(auth()->user());
+        $personalChecklistItem = $personalChecklist->personalChecklistItems()->create([
             'content' => $request->validated('content'),
         ]);
-        // todo investigate eager loading
 
-        return response()->json($item, 201);
+        // todo investigate eager loading and whether this is a good use case for it?
+
+        return response()->json($personalChecklistItem, 201);
     }
 
     public function update(PersonalChecklistItem $personalChecklistItem): JsonResponse

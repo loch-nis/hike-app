@@ -23,12 +23,12 @@ Route::prefix('api')->middleware('api')->group(function () {
             ->name('hikes.show');
 
         Route::get('hikes/{hike}/me/personal-checklist', [PersonalChecklistController::class, 'show'])
-            ->can('view', 'hike') // todo is there a reason to check this on the personal checklist policy instead? no because the auth check is the same on both, so that would not be DRY. And
+            ->can('view', 'hike') // todo-X is there a reason to check this on the personal checklist policy instead? no because the auth check is the same on both, so that would not be DRY. And
             // this is the way the whole thing is set up, so no point in trying to future proof EVERYTHING CHANGING. YAGNI ftw
             ->name('personal-checklist.show');
 
         Route::post('hikes/{hike}/me/personal-checklist-items', [PersonalChecklistItemController::class, 'store'])
-            ->can('create', [PersonalChecklistItem::class, 'hike']) // self-quiz: why does this work?
+            ->can('create', [PersonalChecklistItem::class, 'hike']) // self-quiz: why does this work? Answer is in the policy
             ->name('personal-checklist-items.store');
 
         Route::patch('personal-checklist-items/{personalChecklistItem}',
@@ -41,7 +41,7 @@ Route::prefix('api')->middleware('api')->group(function () {
             ->can('delete', 'personalChecklistItem')
             ->name('personal-checklist-items.destroy');
 
-        // todo policies and names for all these routes (and TDD (BDD naming!) tests!!)
+        // todo-X policies and names for all these routes (and TDD (BDD naming!) tests!!)
         Route::get('hikes/{hike}/common-checklist', [CommonChecklistController::class, 'show'])
             ->name('common-checklist.show');
 

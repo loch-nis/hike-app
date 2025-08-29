@@ -19,11 +19,12 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,
-      // staleTime: 0,
     },
   },
 });
 
+// todo calling this here is bad, since it won't set the token again after initial app mount.. only on reload. Fixing seems a bit complicated / requires a bit of thought, but honestly don't spend too much time on it! Kind of a niche issue it seems
+// todo especially since I'm reading and writing directly from localStorage, so the rest of the app doesn't know when the token changes, so I can't just put this inside an effect.
 configureEcho({
   broadcaster: "reverb",
   key: import.meta.env.VITE_REVERB_APP_KEY,

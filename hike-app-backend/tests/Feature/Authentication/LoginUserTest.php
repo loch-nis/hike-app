@@ -38,4 +38,4 @@ it('rejects invalid credentials', function () {
         ->assertUnauthorized();
 });
 
-// todo describe(guest) and describe(auth) or just another test trying to log in when already auth. or wait is there any reason to test that here? maybe its a frontend thing.
+it('rejects a login attempt from a user who is already logged in')->todo();

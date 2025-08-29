@@ -9,6 +9,7 @@ use App\Models\User;
 
 class PersonalChecklistItemPolicy
 {
+    // self-quiz answer:
     /**
      * Policy conventions:
      * When a child resource belongs to a parent
@@ -18,7 +19,7 @@ class PersonalChecklistItemPolicy
      *   - Consistent policy targeting
      *   - Parent model is route bound and injected
      *   - No accidental lookup in the parent's policy
-     todo delete this at some point :)*/
+     */
     public function create(User $user, Hike $hike): bool
     {
         if ($user->hikes->find($hike)) {
@@ -35,8 +36,7 @@ class PersonalChecklistItemPolicy
 
     private function userOwnsChecklist(User $user, PersonalChecklist $personalChecklist): bool
     {
-        // todo is this really a good way to check?
-        return $user->hikeUsers()->whereKey($personalChecklist->hikeUser->getKey())->exists();
+        return $user->id === $personalChecklist->hikeUser->user_id;
     }
 
     public function delete(User $user, PersonalChecklistItem $personalChecklistItem): bool
