@@ -1,9 +1,11 @@
 
 # A Web App For Planning Hikes
 
+### Quick demo showing authentication, hikes, and real-time checklist updates:
+
 ![Demo](https://private-user-images.githubusercontent.com/188976979/483641220-b932b289-6979-49e2-9521-b836f717e43f.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTY0NzQ5MTcsIm5iZiI6MTc1NjQ3NDYxNywicGF0aCI6Ii8xODg5NzY5NzkvNDgzNjQxMjIwLWI5MzJiMjg5LTY5NzktNDllMi05NTIxLWI4MzZmNzE3ZTQzZi5naWY_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODI5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyOVQxMzM2NTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zOGRjMWJhMTFhMWY0OWRhM2M5YTg3N2ZkZTZiNzk4MTkxMmQ5MGM2MGQ5ZDRlZWUyNjhmMjdhOTc0YzhkNmQyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.8oh2UdkdMjC18rcBZYEg25djV8ulukrtQC-ad5f2a7I)
 
-With a Laravel backend and a React frontend + Tailwind for styling.
+Hike app with a Laravel backend and a React frontend + Tailwind for styling.
 
 Supports real-time checklist updates using Laravel Reverb.
 
