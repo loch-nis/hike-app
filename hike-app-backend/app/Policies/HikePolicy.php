@@ -7,13 +7,6 @@ use App\Models\User;
 
 class HikePolicy
 {
-    public function __call($name, $arguments)
-    {
-        // todo-X fix
-        dump('CREATE NOT FOUND HERE!!!');
-        dump($name);
-    }
-
     public function view(User $user, Hike $hike): bool
     {
         return $this->isUserConnectedToHike($user, $hike);

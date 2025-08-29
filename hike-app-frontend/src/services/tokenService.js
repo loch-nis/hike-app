@@ -36,13 +36,15 @@ export function isTokenSet() {
   return getToken() !== null;
 }
 
-// todo good cases for a unit tests:
 export function isTokenExpired() {
   const expiry = getTokenExpiry();
   return expiry ? Date.now() > expiry : true;
 }
 
 export function calculateTokenRefreshDelay() {
+  const tokenExpiry = getTokenExpiry();
+  if (!tokenExpiry) return null;
+
   const oneMinuteBuffer = 60_000;
   return getTokenExpiry() - Date.now() - oneMinuteBuffer;
 }

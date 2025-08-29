@@ -3,10 +3,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   setToken,
   getToken,
-  removeToken,
   setTokenExpiry,
-  getTokenExpiry,
-  removeTokenExpiry,
   removeTokenAndTokenExpiry,
   isTokenSet,
   isTokenExpired,
@@ -27,10 +24,15 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const refreshTimerRef = useRef(null);
 
-  useEffect(function () {
-    resumeSession(); // self-quiz: Why should this be in an effect?
+  // todo naming here isn't ideal, should refactor at some point - name clash with setToken()
+  const [authToken, setAuthToken] = useState(getToken());
 
-    return clearScheduledRefresh; // self-quiz: what kind of function is this? And when does it run?
+  useEffect(function () {
+    resumeSession(); // reminder-quiz: Why should this be in an effect?
+
+    return clearScheduledRefresh;
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function resumeSession() {
@@ -45,6 +47,7 @@ export function AuthProvider({ children }) {
       return;
     }
 
+    setAuthToken(getToken());
     scheduleTokenRefresh();
     await resolveUserFromToken();
     setIsAuthReady(true);
@@ -56,6 +59,7 @@ export function AuthProvider({ children }) {
       password,
     });
 
+    setAuthToken(newToken);
     setToken(newToken);
     setTokenExpiry(expiresIn);
     scheduleTokenRefresh();
@@ -65,7 +69,7 @@ export function AuthProvider({ children }) {
   async function resolveUserFromToken() {
     if (!isTokenSet()) return;
 
-    const { user } = await fetchUserApi();
+    const user = await fetchUserApi();
     setUser(user);
   }
 
@@ -78,6 +82,7 @@ export function AuthProvider({ children }) {
     clearScheduledRefresh();
     await logoutApi();
     removeTokenAndTokenExpiry();
+    setAuthToken(null);
   }
 
   function scheduleTokenRefresh() {
@@ -89,6 +94,7 @@ export function AuthProvider({ children }) {
       const { access_token: newToken, expires_in: expiresIn } =
         await refreshApi();
 
+      setAuthToken(newToken);
       setToken(newToken);
       setTokenExpiry(expiresIn);
 
@@ -112,6 +118,7 @@ export function AuthProvider({ children }) {
         logout,
         isAuthReady,
         isAuthenticated: user !== null,
+        token: authToken,
       }}
     >
       {children}

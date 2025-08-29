@@ -16,5 +16,3 @@ export function useCommonChecklist({ hikeId }) {
     isError,
   };
 }
-
-// todo can I reuse logic for personal and common hooks? or maybe just don't. do this later if it makes sense..

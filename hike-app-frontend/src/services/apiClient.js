@@ -25,10 +25,10 @@ apiClient.interceptors.response.use(
     toast.error(message);
 
     if (error?.response?.status === 401) {
-      removeTokenAndTokenExpiry(); //quick fix - but then, there shouldn't be a token if this happens...
+      removeTokenAndTokenExpiry();
 
       window.location.href = "/auth/login";
-      // this is why I will use Redux in my next project...
+      // not ideal.. this is why I will use something like Redux for state management in my next project...
     }
 
     // todo add handling for 403

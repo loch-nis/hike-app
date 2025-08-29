@@ -6,7 +6,6 @@ use App\Http\Controllers\CommonChecklistItemController;
 use App\Http\Controllers\HikeController;
 use App\Http\Controllers\PersonalChecklistController;
 use App\Http\Controllers\PersonalChecklistItemController;
-use App\Models\PersonalChecklistItem;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->middleware('api')->group(function () {
@@ -23,12 +22,11 @@ Route::prefix('api')->middleware('api')->group(function () {
             ->name('hikes.show');
 
         Route::get('hikes/{hike}/me/personal-checklist', [PersonalChecklistController::class, 'show'])
-            ->can('view', 'hike') // todo-X is there a reason to check this on the personal checklist policy instead? no because the auth check is the same on both, so that would not be DRY. And
-            // this is the way the whole thing is set up, so no point in trying to future proof EVERYTHING CHANGING. YAGNI ftw
+            ->can('view', 'hike') // safe because of the structure of the controller. No point trying to do a deep check in an attempt to future proof, should the way controller works change dramatically. I believe this is a case of YAGNI / avoidance of premature optimization
             ->name('personal-checklist.show');
 
         Route::post('hikes/{hike}/me/personal-checklist-items', [PersonalChecklistItemController::class, 'store'])
-            ->can('create', [PersonalChecklistItem::class, 'hike']) // self-quiz: why does this work? Answer is in the policy
+            ->can('view', 'hike')
             ->name('personal-checklist-items.store');
 
         Route::patch('personal-checklist-items/{personalChecklistItem}',
@@ -41,7 +39,7 @@ Route::prefix('api')->middleware('api')->group(function () {
             ->can('delete', 'personalChecklistItem')
             ->name('personal-checklist-items.destroy');
 
-        // todo-X policies and names for all these routes (and TDD (BDD naming!) tests!!)
+        // todo policies for all these routes - do it test driven! (with BDD naming for the tests)
         Route::get('hikes/{hike}/common-checklist', [CommonChecklistController::class, 'show'])
             ->name('common-checklist.show');
 

@@ -9,9 +9,13 @@ describe('when authorized', function () {
         $hike = setupHikeWithItems();
         $memberOfHike = $hike->hikeUsers->first()->user;
 
-        authGetJson($memberOfHike, route('personal-checklist.show', $hike->id))
+        $response = authGetJson($memberOfHike, route('personal-checklist.show', $hike->id))
             ->assertOK()
             ->assertJsonStructure(['data']);
+
+        $itemsInChecklist = PersonalChecklistItem::all()->toArray();
+
+        expect($response['data'])->toEqual($itemsInChecklist);
     });
 
     it('allows a member of the hike to create a personal checklist item', function ($content) {

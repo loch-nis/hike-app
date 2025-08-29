@@ -35,7 +35,7 @@ class PersonalChecklistItemController extends Controller
     public function destroy(PersonalChecklistItem $personalChecklistItem): JsonResponse
     {
         // Route model binding. Throws 404 if not found automatically before this
-        // self-quiz: how does laravel infer model binding? hint: its in this file :))
+        // reminder-quiz: how does laravel infer model binding? hint: its in this file :))
         $personalChecklistItem->delete();
 
         return response()->json($personalChecklistItem);

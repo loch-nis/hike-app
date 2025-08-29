@@ -16,4 +16,4 @@ export function AppLayout() {
     </>
   );
 }
-// todo can I turn this background into parchment?
+// todo turn this background into parchment?

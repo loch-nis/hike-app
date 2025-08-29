@@ -1,3 +1,4 @@
+import snakecaseKeys from "snakecase-keys";
 import { apiClient } from "./apiClient";
 import { authClient } from "./authClient";
 import camelcaseKeys from "camelcase-keys";
@@ -19,14 +20,16 @@ export async function signupApi({
   password,
   passwordConfirm,
 }) {
-  const response = await authClient.post("/auth/register", {
-    first_name: firstName,
-    last_name: lastName,
-    email,
-    password,
-    password_confirmation: passwordConfirm,
-  });
-  // todo use camelcase Keys instead - but the opposite way. Snake case?
+  const response = await authClient.post(
+    "/auth/register",
+    snakecaseKeys({
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirmation: passwordConfirm,
+    }),
+  );
 
   return response.data;
 }
@@ -38,7 +41,7 @@ export async function logoutApi() {
 export async function fetchUserApi() {
   const response = await apiClient.get("/auth/me");
   const user = camelcaseKeys(response.data, { deep: true });
-  return { user }; // todo this is the only place where it returns an obj. Fix inconsistency
+  return user;
 }
 export async function refreshApi() {
   const response = await apiClient.post("/auth/refresh");

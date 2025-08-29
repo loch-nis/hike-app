@@ -18,7 +18,7 @@ class CommonChecklistItemController extends Controller
             'content' => $request->validated('content'),
         ]);
 
-        // todo-X for all three: add ->toOthers() ?? and test
+        // todo investigate adding ->toOthers() when I have my e2e-tests up and running
         CommonChecklistUpdated::broadcast($commonChecklist->id);
 
         return response()->json($commonChecklistItem);

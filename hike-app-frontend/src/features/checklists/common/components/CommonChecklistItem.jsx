@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../../components/Checkbox";
 
+// todo investigate extracting the ui into a shared and reusable "checklistItem" component?! Do be careful of premature optimization / YAGNI though
 export function CommonChecklistItem({ item }) {
   const { toggleItem } = useToggleCommonChecklistItem();
   const { deleteItem } = useDeleteCommonChecklistItem();
@@ -36,4 +37,3 @@ export function CommonChecklistItem({ item }) {
     </li>
   );
 }
-// todo extract the ui into a shared "checklistItem" component?! Do be careful of premature optimization / YAGNI

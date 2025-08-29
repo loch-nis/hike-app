@@ -9,11 +9,8 @@ class PersonalChecklistController extends Controller
 {
     public function show(Hike $hike): JsonResponse
     {
-        $hikeUser = auth()->user()->hikeUsers()->where('hike_id',
-            $hike->id)->firstOrFail();
+        $personalChecklist = $hike->personalChecklistFor(auth()->user());
 
-        $items = $hikeUser->personalChecklist->personalChecklistItems;
-
-        return response()->json(['data' => $items]);
+        return response()->json(['data' => $personalChecklist->personalChecklistItems]);
     }
 }
