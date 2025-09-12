@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 export function AuthLayout() {
   const images = ["canada.png", "sweden-camp.png"];
-  const randomIndex = Math.floor(Math.random() * 3);
+  const randomIndex = Math.floor(Math.random() * images.length);
   const randomImage = images[randomIndex];
 
   return (
