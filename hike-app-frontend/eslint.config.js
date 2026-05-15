@@ -29,7 +29,10 @@ export default defineConfig([
       "no-unused-vars": "warn",
     }, */
     rules: {
-      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { varsIgnorePattern: "^[A-Z_]" },
+      ],
     },
   },
 ]);

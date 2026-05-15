@@ -1,11 +1,11 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { API_BASE_URL } from "../config";
 import {
   getToken,
   isTokenSet,
   removeTokenAndTokenExpiry,
 } from "./tokenService";
-import toast from "react-hot-toast";
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -27,7 +27,9 @@ apiClient.interceptors.response.use(
     if (error?.response?.status === 401) {
       removeTokenAndTokenExpiry();
 
-      window.location.href = "/auth/login";
+      if (!window.location.pathname.includes("/auth/login")) {
+        window.location.href = "/auth/login";
+      }
       // not ideal.. this is why I will use something like Redux for state management in my next project...
     }
 
